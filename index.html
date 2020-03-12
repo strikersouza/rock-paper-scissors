@@ -8,9 +8,9 @@
 <body>
     <script>
         function computerPlay(){
-            let choice = Math.floor(Math.random() * 3)
-            let finalChoice = ""
-            switch (choice){
+            let computerChoice = Math.floor(Math.random() * 3)
+            let computerFinalChoice = ""
+            switch (computerChoice){
                 case 0:
                     finalChoice = "rock";
                     break;
@@ -24,10 +24,17 @@
                 console.log("Error! Number out of range.");
             }
 
-            return finalChoice;
+            return computerFinalChoice;
         }
+
+        function playerPlay(){
+            let playerChoice = prompt("Select rock, paper or scissor: ").toLowerCase();
+            return playerChoice;
+        }
+
         const computerSelection = computerPlay();
-        console.log(computerSelection);
+        const playerSelection = playerPlay();
+        console.log(playerSelection);
     </script>
 </body>
 </html>
