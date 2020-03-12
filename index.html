@@ -6,6 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        function computerPlay(){
+            let choice = Math.floor(Math.random() * 3)
+            let finalChoice = ""
+            switch (choice){
+                case 0:
+                    finalChoice = "rock";
+                    break;
+                case 1:
+                    finalChoice = "paper";
+                    break;
+                case 2:
+                    finalChoice = "scissor";
+                    break;
+                default:
+                console.log("Error! Number out of range.");
+            }
+
+            return finalChoice;
+        }
+        const computerSelection = computerPlay();
+        console.log(computerSelection);
+    </script>
 </body>
 </html>
