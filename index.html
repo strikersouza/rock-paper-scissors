@@ -8,17 +8,17 @@
 <body>
     <script>
         function computerPlay(){
-            let computerChoice = Math.floor(Math.random() * 3)
-            let computerFinalChoice = ""
+            let computerChoice = Math.floor(Math.random() * 3);
+            let computerFinalChoice = "";
             switch (computerChoice){
                 case 0:
-                    finalChoice = "rock";
+                    computerFinalChoice = "rock";
                     break;
                 case 1:
-                    finalChoice = "paper";
+                    computerFinalChoice = "paper";
                     break;
                 case 2:
-                    finalChoice = "scissor";
+                    computerFinalChoice = "scissor";
                     break;
                 default:
                 console.log("Error! Number out of range.");
@@ -32,9 +32,64 @@
             return playerChoice;
         }
 
-        const computerSelection = computerPlay();
-        const playerSelection = playerPlay();
-        console.log(playerSelection);
+        function reset(playerSelection, computerSelection){
+            computerSelection = "";
+            playerSelection = "";
+        }
+
+        let computerSelection = "";
+        let playerSelection = "";
+
+        function game(){
+            let playerCount = 0;
+            let computerCount = 0;
+                function playRound(playerSelection, computerSelection){
+                    if(playerSelection == "rock"){
+                        if(computerSelection == "scissor"){
+                            console.log("Player Won!");
+                            return playerCount++;
+                        } else if (computerSelection == "paper"){
+                            console.log("Computer Won!");
+                            return computerCount++;
+                        } else {
+                            console.log("Draw.");
+                        }
+                    } else if (playerSelection == "paper"){
+                        if(computerSelection == "scissor"){
+                            console.log("Computer Won!");
+                            return computerCount++;
+                        } else if (computerSelection == "rock"){
+                            console.log("Player Won!");
+                            return playerCount++;
+                        } else {
+                            console.log("Draw.");
+                        }
+                    } else{
+                        if(computerSelection == "paper"){
+                            console.log("Player Won!");
+                            return playerCount++;
+                        } else if (computerSelection == "rock"){
+                            console.log("Computer Won!");
+                            return computerCount++;
+                        } else {
+                            console.log("Draw.");
+                        }
+                    }
+                }
+
+            for(i = 0; i <5; i++){
+                computerSelection = computerPlay();
+                playerSelection = playerPlay();
+                playRound(playerSelection, computerSelection);
+                reset(playerSelection, computerSelection);
+            }
+
+            result = "Score - player : " + playerCount + ", computer : " + computerCount;
+            return result;  
+        }
+
+        console.log(game());
+        
     </script>
 </body>
 </html>
