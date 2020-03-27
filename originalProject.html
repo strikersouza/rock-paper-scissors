@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function computerPlay(){
+            let computerChoice = Math.floor(Math.random() * 3);
+            let computerFinalChoice = "";
+            switch (computerChoice){
+                case 0:
+                    computerFinalChoice = "rock";
+                    break;
+                case 1:
+                    computerFinalChoice = "paper";
+                    break;
+                case 2:
+                    computerFinalChoice = "scissor";
+                    break;
+                default:
+                console.log("Error! Number out of range.");
+            }
+
+            return computerFinalChoice;
+        }
+
+        function playerPlay(){
+            let playerChoice = prompt("Select rock, paper or scissor: ").toLowerCase();
+            return playerChoice;
+        }
+
+        function reset(playerSelection, computerSelection){
+            computerSelection = "";
+            playerSelection = "";
+        }
+
+        let playerCount = 0;
+        let computerCount = 0;
+
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection == "rock"){
+                if(computerSelection == "scissor"){
+                    console.log("Player Won!");
+                    return playerCount++;
+                } else if (computerSelection == "paper"){
+                    console.log("Computer Won!");
+                    return computerCount++;
+                } else {
+                    console.log("Draw.");
+                }
+            } else if (playerSelection == "paper"){
+                if(computerSelection == "scissor"){
+                    console.log("Computer Won!");
+                    return computerCount++;
+                } else if (computerSelection == "rock"){
+                    console.log("Player Won!");
+                    return playerCount++;
+                } else {
+                    console.log("Draw.");
+                }
+            } else{
+                if(computerSelection == "paper"){
+                    console.log("Player Won!");
+                    return playerCount++;
+                } else if (computerSelection == "rock"){
+                    console.log("Computer Won!");
+                    return computerCount++;
+                } else {
+                    console.log("Draw.");
+                }
+            }
+        }
+
+        function game(){
+            for(i = 0; i <5; i++){
+                computerSelection = computerPlay();
+                playerSelection = playerPlay();
+                playRound(playerSelection, computerSelection);
+                reset(playerSelection, computerSelection);
+            }
+
+            result = "Score - player : " + playerCount + ", computer : " + computerCount;
+            return result;  
+        }
+
+        console.log(game());
+        
+    </script>
+</body>
+</html>

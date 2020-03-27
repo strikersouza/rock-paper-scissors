@@ -4,9 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        body{
+            background-color: cornflowerblue;
+            font-family: Arial, Helvetica, sans-serif;
+            color: orange;
+        }
+        .container, .container p{
+            margin: 30px 0;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Rock, Paper, Scissor!</h1>
+    </div>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissor">Scissor</button>
     <script>
+        const buttons = document.querySelectorAll('button');
+        const container = document.querySelector('.container');
+
+        const para = document.createElement('p');
+        const score = document.createElement('p');
+
+        para.classList.add('content');
+
+        container.appendChild(para);
+        container.appendChild(score);
+
+        let playerChoice = "";
+        let computer = "";
+        buttons.forEach((button) => {
+            button.addEventListener('click', (e) =>{
+                playerChoice = button.id;
+                computerChoice = computerPlay();
+                console.log("player: " + button.id);
+                console.log("computer: " + computer);
+                game();
+            });
+        });
+
         function computerPlay(){
             let computerChoice = Math.floor(Math.random() * 3);
             let computerFinalChoice = "";
@@ -27,68 +72,66 @@
             return computerFinalChoice;
         }
 
-        function playerPlay(){
-            let playerChoice = prompt("Select rock, paper or scissor: ").toLowerCase();
-            return playerChoice;
-        }
+        let playerCount = 0;
+        let computerCount = 0;
 
-        function reset(playerSelection, computerSelection){
-            computerSelection = "";
-            playerSelection = "";
+        function playRound(playerSelection, computerSelection){
+            if(playerSelection == "rock"){
+                if(computerSelection == "scissor"){
+                    playerCount++;
+                    console.log("Player Won!");
+                    para.textContent = "Player won the round!";
+                } else if (computerSelection == "paper"){
+                    computerCount++;
+                    console.log("Computer Won!");
+                    para.textContent = "Computer won the round!";
+                } else {
+                    console.log("Draw.");
+                    para.textContent = "It's a tie.";
+                }
+            } else if (playerSelection == "paper"){
+                if(computerSelection == "scissor"){
+                    computerCount++;
+                    console.log("Computer Won!");
+                    para.textContent = "Computer won the round!";
+                } else if (computerSelection == "rock"){
+                    playerCount++;
+                    console.log("Player Won!");
+                    para.textContent = "Player won the round!";
+                } else {
+                    console.log("Draw.");
+                    para.textContent = "It's a tie.";
+                }
+            } else{
+                if(computerSelection == "paper"){
+                    playerCount++;
+                    console.log("Player Won!");
+                    para.textContent = "Player won the round!";
+                } else if (computerSelection == "rock"){
+                    computerCount++;
+                    console.log("Computer Won!");
+                    para.textContent = "Computer won the round!";
+                } else {
+                    console.log("Draw.");
+                    para.textContent = "It's a tie.";
+                }
+            }
+            return score.textContent = `Player ${playerCount} x Computer: ${computerCount}`;
         }
-
-        let computerSelection = "";
-        let playerSelection = "";
 
         function game(){
-            let playerCount = 0;
-            let computerCount = 0;
-                function playRound(playerSelection, computerSelection){
-                    if(playerSelection == "rock"){
-                        if(computerSelection == "scissor"){
-                            console.log("Player Won!");
-                            return playerCount++;
-                        } else if (computerSelection == "paper"){
-                            console.log("Computer Won!");
-                            return computerCount++;
-                        } else {
-                            console.log("Draw.");
-                        }
-                    } else if (playerSelection == "paper"){
-                        if(computerSelection == "scissor"){
-                            console.log("Computer Won!");
-                            return computerCount++;
-                        } else if (computerSelection == "rock"){
-                            console.log("Player Won!");
-                            return playerCount++;
-                        } else {
-                            console.log("Draw.");
-                        }
-                    } else{
-                        if(computerSelection == "paper"){
-                            console.log("Player Won!");
-                            return playerCount++;
-                        } else if (computerSelection == "rock"){
-                            console.log("Computer Won!");
-                            return computerCount++;
-                        } else {
-                            console.log("Draw.");
-                        }
-                    }
-                }
+            playRound(playerChoice, computerChoice);
 
-            for(i = 0; i <5; i++){
-                computerSelection = computerPlay();
-                playerSelection = playerPlay();
-                playRound(playerSelection, computerSelection);
-                reset(playerSelection, computerSelection);
-            }
-
-            result = "Score - player : " + playerCount + ", computer : " + computerCount;
-            return result;  
+            if(playerCount >= 5){
+                alert("The Winner is Player!!");
+                computerCount = 0;
+                playerCount = 0;
+            } else if (computerCount >= 5){
+                alert("The Winner is Computer!!");
+                computerCount = 0;
+                playerCount = 0;
+            } 
         }
-
-        console.log(game());
         
     </script>
 </body>
